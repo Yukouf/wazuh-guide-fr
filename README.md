@@ -37,18 +37,24 @@ Pour débuter, suivez le parcours avec des exemples fictifs, puis utilisez le gu
 
 ## Captures de l'interface
 
-Captures réelles réalisées le 12 octobre 2026, vérifiées visuellement après export. Chaque image comporte un titre et trois explications simples. Les vues Threat Hunting et Vulnerability Detection assemblent le haut de la page et ses graphiques après défilement ; ce montage est indiqué dans l'image. Les comptes, identifiants et volumes principaux sont masqués, et les lignes détaillées de vulnérabilités sont exclues. Les graphiques agrégés restent visibles. Cliquez sur une image pour l'afficher en grand.
+Captures réelles réalisées le 12 octobre 2026, vérifiées visuellement après export. Les repères bleus **1, 2 et 3** indiquent les commandes ou panneaux à lire ; leur légende se trouve sous chaque image. Les masques couvrent les valeurs et identifiants internes sans cacher les intitulés des cartes. Les vues Threat Hunting et Vulnerability Detection assemblent le haut de la page et ses graphiques après défilement ; ce montage est indiqué dans l'image. Les lignes détaillées de vulnérabilités sont exclues. Les graphiques agrégés restent visibles. Cliquez sur une image pour l'afficher en grand.
 
 **Traduction des boutons :** Dashboard = vue d'ensemble ; Events = liste des événements ; Inventory = inventaire ; Add filter = ajouter un filtre ; Refresh = actualiser ; Last 24 hours = dernières 24 heures.
 
 ### Threat Hunting
 ![Onglets et filtres de Threat Hunting](assets/screenshots/threat-hunting.jpg)
+
+**Repères :** **1** choisit la période ; **2** ouvre les événements ; **3** permet de filtrer une machine.
+
 **À faire :** choisissez une période, cliquez sur **Events**, puis recherchez une machine. Ouvrez un événement et lisez son heure et son message. Vérifiez avec l'utilisateur ou l'administrateur si l'activité était prévue.
 
 **À regarder :** un pic dans le graphique indique davantage d'alertes à ce moment. Le graphique circulaire présente les techniques associées aux alertes. Un pic n'est pas une preuve d'attaque, et une alerte peut être associée à plusieurs techniques.
 
 ### Vulnerability Detection
 ![Onglets de Vulnerability Detection](assets/screenshots/vulnerability-detection.jpg)
+
+**Repères :** **1** ouvre Inventory ; **2** montre les catégories de sévérité à examiner en premier ; **3** permet d'affiner les résultats.
+
 **À faire :** cliquez sur **Inventory**, filtrez les résultats **Critical** ou **High**, puis ouvrez le détail d'une ligne. Repérez la machine, le logiciel, sa version et la CVE. Vérifiez le correctif dans l'avis de l'éditeur et faites appliquer la mise à jour selon la procédure habituelle. Revenez ensuite vérifier le résultat.
 
 **À regarder :** Critical = critique ; High = élevée ; Medium = moyenne ; Low = faible. La gravité aide à choisir par où commencer, mais une machine exposée ou importante peut être prioritaire.
@@ -58,12 +64,18 @@ Captures réelles réalisées le 12 octobre 2026, vérifiées visuellement aprè
 
 ### Malware Detection
 ![Commandes de Malware Detection](assets/screenshots/malware-detection.jpg)
+
+**Repères :** **1** choisit la période ; **2** ouvre les événements ; **3** montre leur répartition par groupes de règles.
+
 **À faire :** choisissez la période et cliquez sur **Events**. Ouvrez une alerte, lisez la machine, l'heure et le message, puis identifiez la source du signal. Faites vérifier le fichier ou l'activité avec les outils de sécurité de l'organisation ; prévenez l'équipe responsable si le doute persiste.
 
 **À regarder :** les graphiques montrent quand les signaux apparaissent et à quels groupes de règles ils appartiennent. Rootcheck recherche des anomalies ; YARA et VirusTotal sont des intégrations possibles qui nécessitent une configuration. Ne supprimez pas un fichier sur la seule base du graphique.
 
 ### MITRE ATT&CK
 ![Onglets de MITRE ATT&CK](assets/screenshots/mitre-attack.jpg)
+
+**Repères :** **1** ouvre Framework ; **2** ouvre les événements ; **3** présente les tactiques associées aux alertes.
+
 **À faire :** ouvrez **Framework** pour découvrir une technique, puis **Events** pour lire les alertes associées. Regardez le message et le contexte de la machine avant de conclure.
 
 **À comprendre :** une tactique est un objectif, par exemple rester sur une machine. Une technique est le moyen utilisé pour y parvenir. MITRE ATT&CK donne un vocabulaire commun pour expliquer les comportements ; il ne bloque pas les attaques.
