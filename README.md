@@ -2,6 +2,8 @@
 
 Wazuh est une plateforme de cybersécurité open source. Elle rassemble des informations de sécurité provenant des machines et services, les analyse et permet d'enquêter depuis une interface centrale. Elle propose des fonctions SIEM et XDR.
 
+**SIEM** signifie centraliser et analyser des journaux de sécurité. **XDR** désigne la détection et la réponse à partir de plusieurs sources de données. Wazuh aide à repérer et comprendre les problèmes ; les actions automatiques dépendent de sa configuration.
+
 **À quoi ça sert ?** Repérer des comportements suspects, suivre les vulnérabilités, surveiller les fichiers et vérifier les configurations de sécurité. Une alerte est un signal à examiner : elle ne prouve pas automatiquement une attaque.
 
 ## Comment ça fonctionne ?
@@ -29,7 +31,9 @@ L'agent collecte les informations sur une machine. Le serveur Wazuh les analyse.
 | Configuration Assessment | La configuration respecte-t-elle les contrôles ? | Ouvrir les contrôles échoués d'un agent |
 | IT Hygiene | Quels systèmes, logiciels et processus sont présents ? | Examiner l'inventaire de la machine |
 
-**[Ouvrir le guide des pages](docs/guide-pages.md)** · **[Glossaire simple](docs/glossaire.md)** · **[Démonstration en 10 minutes](docs/demo.md)**
+**[Commencer avec des exemples simples](docs/parcours-debutant.md)** · **[Guide des pages](docs/guide-pages.md)** · **[Glossaire simple](docs/glossaire.md)** · **[Démonstration en 10 minutes](docs/demo.md)**
+
+Pour débuter, suivez le parcours avec des exemples fictifs, puis utilisez le guide des pages pour retrouver les boutons. Ce dépôt présente l'interface et les concepts ; il ne fournit pas une installation ou une configuration prête à déployer.
 
 ## Captures de l'interface
 
@@ -41,7 +45,7 @@ Captures réelles réalisées le 12 octobre 2026, vérifiées visuellement aprè
 ![Onglets et filtres de Threat Hunting](assets/screenshots/threat-hunting.jpg)
 **À faire :** choisissez une période, cliquez sur **Events**, puis recherchez une machine. Ouvrez un événement et lisez son heure et son message. Vérifiez avec l'utilisateur ou l'administrateur si l'activité était prévue.
 
-**À regarder :** un pic dans le graphique indique davantage d'alertes à ce moment. Le graphique circulaire répartit les alertes selon les techniques associées. Un pic n'est pas une preuve d'attaque.
+**À regarder :** un pic dans le graphique indique davantage d'alertes à ce moment. Le graphique circulaire présente les techniques associées aux alertes. Un pic n'est pas une preuve d'attaque, et une alerte peut être associée à plusieurs techniques.
 
 ### Vulnerability Detection
 ![Onglets de Vulnerability Detection](assets/screenshots/vulnerability-detection.jpg)
@@ -69,6 +73,12 @@ Captures réelles réalisées le 12 octobre 2026, vérifiées visuellement aprè
 La détection dépend des sources collectées, règles, modules et intégrations configurés. Afficher une page Malware Detection ne garantit pas qu'une intégration YARA ou VirusTotal est activée. Une page vide peut aussi venir de la période sélectionnée, des filtres ou d'un problème de collecte.
 
 Une vulnérabilité détectée ne signifie pas qu'elle a été exploitée. Un événement associé à MITRE ATT&CK ne suffit pas à attribuer une attaque. Les vues de conformité aident à examiner des contrôles ; elles ne constituent pas une certification.
+
+**Trois distinctions utiles :** un événement est un fait enregistré ; une alerte est un résultat de détection à examiner ; un incident est une situation qualifiée qui nécessite un traitement. Le niveau d'une règle Wazuh aide au tri des alertes. Le score CVSS mesure la sévérité d'une vulnérabilité. Le risque dépend aussi du contexte de l'organisation.
+
+## Périmètre du guide
+
+Les quatre modules principaux ont été consultés dans l'interface pour vérifier les onglets et commandes présentés. FIM, Configuration Assessment, IT Hygiene et conformité sont décrits pour donner une vue d'ensemble ; ils ne disposent pas ici d'un tutoriel illustré complet. Les noms des boutons et les champs disponibles peuvent varier selon la version, les droits et la configuration. Aucun numéro de version Wazuh n'est affirmé sans vérification.
 
 ## Sources
 

@@ -3,14 +3,14 @@
 | Temps | Écran ou support | Message à expliquer |
 | --- | --- | --- |
 | 0–1 min | README et architecture | Les machines remontent des données, Wazuh les analyse et un analyste examine les résultats. |
-| 1–3 min | Threat Hunting | Choisir une période, filtrer, passer à Events et expliquer comment lire une alerte. |
+| 1–3 min | Threat Hunting | Choisir une période, ouvrir Events, filtrer une machine et expliquer comment lire une alerte. |
 | 3–5 min | Vulnerability Detection | Ouvrir Inventory, montrer les colonnes et expliquer la différence entre faille connue et exploitation. |
 | 5–7 min | Malware Detection | Expliquer les sources possibles et pourquoi une alerte nécessite une confirmation. |
 | 7–8 min | MITRE ATT&CK | Distinguer objectif et méthode, puis montrer le passage du référentiel aux événements. |
 | 8–9 min | FIM et SCA | Illustrer les changements de fichiers et les contrôles de configuration. |
 | 9–10 min | Glossaire | Revenir sur SIEM, agent, CVE et MITRE ATT&CK, puis répondre aux questions. |
 
-Utiliser les captures publiques du README ou un laboratoire dédié avec des données fictives. Pour une démonstration en direct, préparer la période et les filtres et vérifier que les informations affichées peuvent être partagées.
+Utiliser les captures publiques du README ou un laboratoire dédié avec des données fictives. Pour une démonstration en direct, préparer la période et les filtres et vérifier que les informations affichées peuvent être partagées. Les exemples du [parcours débutant](parcours-debutant.md) peuvent servir de support aux questions.
 
 ## Exemple d'explication orale
 

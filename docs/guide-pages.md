@@ -29,7 +29,7 @@ Ce guide explique **où cliquer, quoi regarder et quoi faire ensuite**. Les bout
 
 ## 1. Threat Hunting — rechercher des activités suspectes
 
-**Objectif :** explorer les alertes collectées pour comprendre ce qui s'est passé. Le Dashboard affiche des indicateurs et graphiques ; Events permet de consulter les événements.
+**Objectif :** explorer les alertes pour comprendre ce qui s'est passé. Le Dashboard affiche des indicateurs et graphiques ; Events permet de consulter les événements associés aux alertes. Cette consultation est un point de départ pour la recherche de menaces : une démarche de Threat Hunting peut aussi partir d'une hypothèse, par exemple « un compte est-il utilisé à des heures inhabituelles ? ».
 
 1. Ouvrir Threat Hunting depuis l'accueil.
 2. Choisir une période correspondant au moment recherché. Last 24 hours est un point de départ.
@@ -38,7 +38,7 @@ Ce guide explique **où cliquer, quoi regarder et quoi faire ensuite**. Les bout
 5. Lire l'heure, la machine et le message. Repérer le niveau et le numéro de règle si une vérification est nécessaire.
 6. Regarder les événements juste avant et après. Demander si l'opération était prévue : une connexion ou une commande peut être normale.
 
-**Comment lire la capture :** les cartes comptent les alertes et les connexions réussies ou échouées. Le graphique de gauche montre à quels moments les alertes augmentent. Celui de droite les répartit par techniques associées. Un pic aide à choisir une heure à examiner dans Events.
+**Comment lire la capture :** les cartes comptent les alertes, dont celles classées comme succès ou échec d'authentification par les règles. Elles ne constituent pas nécessairement un décompte de toutes les connexions. Le graphique de gauche montre à quels moments les alertes augmentent. Celui de droite présente les techniques associées aux alertes. Un pic aide à choisir une heure à examiner dans Events.
 
 **Quoi faire ensuite :** si l'activité est prévue, documenter la vérification selon la procédure de l'équipe. Si elle est inhabituelle, conserver les détails et faire examiner la machine par la personne responsable.
 
@@ -53,19 +53,21 @@ rule.groups: "authentication_failed"
 agent.name: "POSTE-DEMO" and rule.level >= 12
 ```
 
-Le niveau d'une règle aide au tri ; il ne remplace pas l'analyse. Si aucun résultat n'apparaît, vérifier période, filtres, état de l'agent et collecte.
+Le filtre `rule.level >= 12` est un exemple de tri, pas un seuil universel pour décider qu'une attaque est confirmée. Le niveau d'une règle aide au tri ; il ne remplace pas l'analyse et ne se compare pas à un score CVSS. Si aucun résultat n'apparaît, vérifier période, filtres, état de l'agent et collecte. La vue des alertes ne contient pas forcément tous les journaux bruts collectés : cela dépend du stockage configuré.
 
 ## 2. Vulnerability Detection — repérer les failles connues
 
-**Objectif :** comparer l'inventaire logiciel collecté avec les informations de vulnérabilités. Dashboard donne la répartition ; Inventory présente les résultats détaillés ; Events permet de suivre les événements de détection.
+**Objectif :** comparer l'inventaire du système et des logiciels, collecté notamment par Syscollector, avec les informations de vulnérabilités. Dashboard donne la répartition ; Inventory présente les vulnérabilités détectées dans l'état de l'inventaire ; Events présente les alertes de détection ou de résolution générées. Les événements dépendent des scans et des conditions de génération des alertes : l'historique Events n'est pas une copie exhaustive d'Inventory.
 
 1. Ouvrir Vulnerability Detection, puis Inventory.
 2. Avec Add filter, garder une machine ou une gravité. Pour la gravité, rechercher le champ `vulnerability.severity` et choisir Critical ou High dans les valeurs disponibles.
-3. Lire le nom de la machine (`agent.name`), le logiciel (`package.name`), sa version (`package.version`) et le numéro de faille (`vulnerability.id`, appelé CVE).
+3. Lire le nom de la machine (`agent.name`), le logiciel (`package.name`), sa version (`package.version`) et l'identifiant CVE de la vulnérabilité (`vulnerability.id`).
 4. Cliquer sur Inspect vulnerability details à gauche de la ligne. Lire la description et la référence de la faille.
 5. Consulter l'avis de l'éditeur : vérifier quelle version corrige la faille et si le résultat s'applique vraiment au logiciel installé.
 6. Faire appliquer la mise à jour selon les habitudes de l'équipe. Commencer par les cas les plus urgents : logiciel exposé, machine importante, faille exploitée ou gravité élevée.
 7. Après la mise à jour, laisser l'inventaire s'actualiser puis revenir dans Inventory pour vérifier le résultat. Si la ligne reste présente, vérifier la version détectée et la date de collecte.
+
+**Si aucun correctif n'est disponible :** faire évaluer une mesure compensatoire par l'équipe responsable, par exemple limiter l'exposition du service. Documenter la décision et prévoir une nouvelle vérification. Wazuh signale la vulnérabilité ; cette page n'installe pas automatiquement les correctifs.
 
 **Comment lire la capture :** Critical signifie critique, High élevée, Medium moyenne et Low faible. Les graphiques montrent la répartition des résultats. Ils ne donnent pas la marche à suivre pour chaque logiciel : il faut ouvrir Inventory.
 
@@ -110,6 +112,8 @@ Rootcheck recherche des anomalies et signatures ; certains signaux peuvent être
 
 Une commande PowerShell peut être associée à une technique sans être malveillante. Le rattachement repose sur les règles ; il ne démontre ni une compromission ni une couverture complète du référentiel.
 
+Les identifiants de techniques commencent par `T`, par exemple `T1059`, et ceux des sous-techniques comportent un suffixe, par exemple `T1059.001`. Une alerte peut être associée à plusieurs techniques. Un nombre élevé d'associations ne correspond donc pas forcément au même nombre d'attaques distinctes.
+
 ## 5. File Integrity Monitoring — suivre les changements
 
 La surveillance d'intégrité compare l'état des fichiers surveillés : contenu, permissions, propriétaire ou attributs selon la configuration. Ouvrir la page, filtrer la période et l'agent, puis examiner les événements de création, modification ou suppression. Identifier le chemin et la nature du changement ; comparer avec une opération de maintenance prévue. Les informations sur l'utilisateur responsable et le détail du contenu dépendent des options configurées.
@@ -143,3 +147,11 @@ Les pages PCI DSS, GDPR, HIPAA, NIST 800-53 et TSC regroupent les alertes associ
 5. Si cela ne suffit pas, faire vérifier la collecte ou l'intégration par l'administrateur Wazuh.
 
 **Pour s'entraîner :** utiliser une machine de laboratoire et des événements autorisés. Les captures du dépôt servent à présenter les commandes ; elles ne remplacent pas la lecture des détails dans votre interface.
+
+## Sources des explications
+
+- [Recherche de menaces avec Wazuh](https://documentation.wazuh.com/current/getting-started/use-cases/threat-hunting.html)
+- [Fonctionnement et vues des vulnérabilités](https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection/how-it-works.html)
+- [Mécanismes de détection des malwares](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/index.html)
+- [Associations MITRE ATT&CK dans Wazuh](https://documentation.wazuh.com/current/user-manual/ruleset/mitre.html)
+- [Syntaxe des recherches DQL](https://docs.opensearch.org/latest/dashboards/dql/)
