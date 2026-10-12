@@ -33,7 +33,7 @@ L'agent collecte les informations sur une machine. Le serveur Wazuh les analyse.
 
 ## Captures de l'interface
 
-Captures réelles réalisées le 12 octobre 2026. Les cadrages montrent les commandes utiles et excluent les données opérationnelles, noms des machines, versions installées et vulnérabilités internes. Ce sont des extraits d'interface, pas des tableaux de bord complets. Les intitulés peuvent varier avec la version et les droits du compte.
+Captures réelles réalisées le 12 octobre 2026. Les vues montrent les titres, commandes, indicateurs et graphiques des tableaux de bord. Des zones opaques masquent les comptes, identifiants du parc, volumes des indicateurs principaux et résultats détaillés de vulnérabilités. Les graphiques agrégés restent visibles pour expliquer le fonctionnement. Les intitulés peuvent varier avec la version et les droits du compte. Cliquez sur une image pour l'afficher en grand.
 
 ### Threat Hunting
 ![Onglets et filtres de Threat Hunting](assets/screenshots/threat-hunting.jpg)
@@ -42,6 +42,9 @@ Captures réelles réalisées le 12 octobre 2026. Les cadrages montrent les comm
 ### Vulnerability Detection
 ![Onglets de Vulnerability Detection](assets/screenshots/vulnerability-detection.jpg)
 **Repères :** Dashboard résume les résultats ; Inventory liste les associations machine, logiciel et vulnérabilité ; Events présente les événements associés.
+
+![Graphiques de répartition des vulnérabilités](assets/screenshots/vulnerability-charts.jpg)
+**Lire les graphiques :** à gauche, les scores de sévérité les plus fréquents ; au centre, la répartition par famille de système ; à droite, les résultats selon l'année de publication et la sévérité. Ces graphiques servent à explorer et prioriser les résultats ; leurs totaux ne représentent pas forcément des CVE uniques.
 
 ### Malware Detection
 ![Commandes de Malware Detection](assets/screenshots/malware-detection.jpg)
