@@ -33,26 +33,36 @@ L'agent collecte les informations sur une machine. Le serveur Wazuh les analyse.
 
 ## Captures de l'interface
 
-Captures réelles réalisées le 12 octobre 2026. Les vues montrent les titres, commandes, indicateurs et graphiques des tableaux de bord. Des zones opaques masquent les comptes, identifiants du parc, volumes des indicateurs principaux et résultats détaillés de vulnérabilités. Les graphiques agrégés restent visibles pour expliquer le fonctionnement. Les intitulés peuvent varier avec la version et les droits du compte. Cliquez sur une image pour l'afficher en grand.
+Captures réelles réalisées le 12 octobre 2026, vérifiées visuellement après export. Chaque image comporte un titre et trois explications simples. Les vues Threat Hunting et Vulnerability Detection assemblent le haut de la page et ses graphiques après défilement ; ce montage est indiqué dans l'image. Les comptes, identifiants et volumes principaux sont masqués, et les lignes détaillées de vulnérabilités sont exclues. Les graphiques agrégés restent visibles. Cliquez sur une image pour l'afficher en grand.
+
+**Traduction des boutons :** Dashboard = vue d'ensemble ; Events = liste des événements ; Inventory = inventaire ; Add filter = ajouter un filtre ; Refresh = actualiser ; Last 24 hours = dernières 24 heures.
 
 ### Threat Hunting
 ![Onglets et filtres de Threat Hunting](assets/screenshots/threat-hunting.jpg)
-**Repères :** Dashboard donne la vue d'ensemble ; Events permet l'investigation ; Search filtre les données ; Last 24 hours définit la période ; Refresh applique la recherche.
+**À faire :** choisissez une période, cliquez sur **Events**, puis recherchez une machine. Ouvrez un événement et lisez son heure et son message. Vérifiez avec l'utilisateur ou l'administrateur si l'activité était prévue.
+
+**À regarder :** un pic dans le graphique indique davantage d'alertes à ce moment. Le graphique circulaire répartit les alertes selon les techniques associées. Un pic n'est pas une preuve d'attaque.
 
 ### Vulnerability Detection
 ![Onglets de Vulnerability Detection](assets/screenshots/vulnerability-detection.jpg)
-**Repères :** Dashboard résume les résultats ; Inventory liste les associations machine, logiciel et vulnérabilité ; Events présente les événements associés.
+**À faire :** cliquez sur **Inventory**, filtrez les résultats **Critical** ou **High**, puis ouvrez le détail d'une ligne. Repérez la machine, le logiciel, sa version et la CVE. Vérifiez le correctif dans l'avis de l'éditeur et faites appliquer la mise à jour selon la procédure habituelle. Revenez ensuite vérifier le résultat.
+
+**À regarder :** Critical = critique ; High = élevée ; Medium = moyenne ; Low = faible. La gravité aide à choisir par où commencer, mais une machine exposée ou importante peut être prioritaire.
 
 ![Graphiques de répartition des vulnérabilités](assets/screenshots/vulnerability-charts.jpg)
 **Lire les graphiques :** à gauche, les scores de sévérité les plus fréquents ; au centre, la répartition par famille de système ; à droite, les résultats selon l'année de publication et la sévérité. Ces graphiques servent à explorer et prioriser les résultats ; leurs totaux ne représentent pas forcément des CVE uniques.
 
 ### Malware Detection
 ![Commandes de Malware Detection](assets/screenshots/malware-detection.jpg)
-**Repères :** définir la période, consulter Dashboard, puis ouvrir Events pour vérifier les signaux et leur origine.
+**À faire :** choisissez la période et cliquez sur **Events**. Ouvrez une alerte, lisez la machine, l'heure et le message, puis identifiez la source du signal. Faites vérifier le fichier ou l'activité avec les outils de sécurité de l'organisation ; prévenez l'équipe responsable si le doute persiste.
+
+**À regarder :** les graphiques montrent quand les signaux apparaissent et à quels groupes de règles ils appartiennent. Rootcheck recherche des anomalies ; YARA et VirusTotal sont des intégrations possibles qui nécessitent une configuration. Ne supprimez pas un fichier sur la seule base du graphique.
 
 ### MITRE ATT&CK
 ![Onglets de MITRE ATT&CK](assets/screenshots/mitre-attack.jpg)
-**Repères :** Dashboard résume les alertes associées ; Intelligence et Framework fournissent le contexte du référentiel ; Events revient aux faits observés.
+**À faire :** ouvrez **Framework** pour découvrir une technique, puis **Events** pour lire les alertes associées. Regardez le message et le contexte de la machine avant de conclure.
+
+**À comprendre :** une tactique est un objectif, par exemple rester sur une machine. Une technique est le moyen utilisé pour y parvenir. MITRE ATT&CK donne un vocabulaire commun pour expliquer les comportements ; il ne bloque pas les attaques.
 
 ## Ce que Wazuh permet, et les limites à comprendre
 
