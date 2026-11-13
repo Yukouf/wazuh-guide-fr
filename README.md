@@ -6,6 +6,8 @@ Wazuh est une plateforme de cybersécurité open source. Elle rassemble des info
 
 **À quoi ça sert ?** Repérer des comportements suspects, suivre les vulnérabilités, surveiller les fichiers et vérifier les configurations de sécurité. Une alerte est un signal à examiner : elle ne prouve pas automatiquement une attaque.
 
+![Page Threat Hunting de Wazuh](assets/screenshots/threat-hunting.jpg)
+
 ## Comment ça fonctionne ?
 
 ```mermaid
