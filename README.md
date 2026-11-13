@@ -1,4 +1,4 @@
-# Comprendre Wazuh — guide pratique en français
+# Comprendre Wazuh : guide pratique en français
 
 Wazuh est une plateforme de cybersécurité open source. Elle rassemble des informations de sécurité provenant des machines et services, les analyse et permet d'enquêter depuis une interface centrale. Elle propose des fonctions SIEM et XDR.
 
