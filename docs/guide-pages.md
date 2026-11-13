@@ -27,7 +27,7 @@ Ce guide explique **où cliquer, quoi regarder et quoi faire ensuite**. Les bout
 
 **Si vous ne savez pas quoi décider :** notez la machine, l'heure, le message et le numéro de règle, puis transmettez ces éléments à l'équipe informatique ou sécurité par le canal interne habituel. Le graphique seul ne suffit pas pour décider de bloquer ou supprimer quelque chose.
 
-## 1. Threat Hunting — rechercher des activités suspectes
+## 1. Threat Hunting : rechercher des activités suspectes
 
 **Objectif :** explorer les alertes pour comprendre ce qui s'est passé. Le Dashboard affiche des indicateurs et graphiques ; Events permet de consulter les événements associés aux alertes. Cette consultation est un point de départ pour la recherche de menaces : une démarche de Threat Hunting peut aussi partir d'une hypothèse, par exemple « un compte est-il utilisé à des heures inhabituelles ? ».
 
@@ -55,7 +55,7 @@ agent.name: "POSTE-DEMO" and rule.level >= 12
 
 Le filtre `rule.level >= 12` est un exemple de tri, pas un seuil universel pour décider qu'une attaque est confirmée. Le niveau d'une règle aide au tri ; il ne remplace pas l'analyse et ne se compare pas à un score CVSS. Si aucun résultat n'apparaît, vérifier période, filtres, état de l'agent et collecte. La vue des alertes ne contient pas forcément tous les journaux bruts collectés : cela dépend du stockage configuré.
 
-## 2. Vulnerability Detection — repérer les failles connues
+## 2. Vulnerability Detection : repérer les failles connues
 
 **Objectif :** comparer l'inventaire du système et des logiciels, collecté notamment par Syscollector, avec les informations de vulnérabilités. Dashboard donne la répartition ; Inventory présente les vulnérabilités détectées dans l'état de l'inventaire ; Events présente les alertes de détection ou de résolution générées. Les événements dépendent des scans et des conditions de génération des alertes : l'historique Events n'est pas une copie exhaustive d'Inventory.
 
@@ -77,7 +77,7 @@ Le filtre `rule.level >= 12` est un exemple de tri, pas un seuil universel pour 
 
 Un total peut compter plusieurs associations entre machines, paquets et CVE. Il ne correspond pas forcément au nombre de failles uniques. Une détection basée sur l'inventaire ne constitue pas un test d'exploitation.
 
-## 3. Malware Detection — enquêter sur les indicateurs
+## 3. Malware Detection : enquêter sur les indicateurs
 
 **Objectif :** examiner les signaux associés à des fichiers malveillants, anomalies ou outils de détection intégrés. La page observée comporte Dashboard et Events ; des filtres de groupes de règles peuvent déjà être appliqués.
 
@@ -96,7 +96,7 @@ Un total peut compter plusieurs associations entre machines, paquets et CVE. Il 
 
 Rootcheck recherche des anomalies et signatures ; certains signaux peuvent être des faux positifs. FIM seul détecte des changements, pas la nature malveillante d'un fichier. YARA et VirusTotal nécessitent une intégration. Wazuh peut également analyser les journaux de Microsoft Defender ou ClamAV. L'absence de résultats dans un panneau ne prouve pas l'absence de malware ni la désactivation d'un module. [Mécanismes documentés](https://documentation.wazuh.com/current/user-manual/capabilities/malware-detection/index.html).
 
-## 4. MITRE ATT&CK — donner du contexte à une alerte
+## 4. MITRE ATT&CK : donner du contexte à une alerte
 
 **Objectif :** rapprocher les alertes des comportements documentés des attaquants. Le référentiel classe les tactiques (objectifs) et techniques (moyens).
 
@@ -114,7 +114,7 @@ Une commande PowerShell peut être associée à une technique sans être malveil
 
 Les identifiants de techniques commencent par `T`, par exemple `T1059`, et ceux des sous-techniques comportent un suffixe, par exemple `T1059.001`. Une alerte peut être associée à plusieurs techniques. Un nombre élevé d'associations ne correspond donc pas forcément au même nombre d'attaques distinctes.
 
-## 5. File Integrity Monitoring — suivre les changements
+## 5. File Integrity Monitoring : suivre les changements
 
 La surveillance d'intégrité compare l'état des fichiers surveillés : contenu, permissions, propriétaire ou attributs selon la configuration. Ouvrir la page, filtrer la période et l'agent, puis examiner les événements de création, modification ou suppression. Identifier le chemin et la nature du changement ; comparer avec une opération de maintenance prévue. Les informations sur l'utilisateur responsable et le détail du contenu dépendent des options configurées.
 
@@ -122,13 +122,13 @@ La surveillance d'intégrité compare l'état des fichiers surveillés : contenu
 
 **Exemple fictif :** un fichier de configuration change hors d'une fenêtre de maintenance. Vérifier qui a effectué l'opération et si elle est autorisée. Seuls les chemins configurés et effectivement collectés sont couverts.
 
-## 6. Configuration Assessment — examiner les contrôles
+## 6. Configuration Assessment : examiner les contrôles
 
 SCA vérifie des paramètres de sécurité à partir de politiques. Sélectionner un agent, ouvrir une politique et consulter les contrôles échoués, leur justification et les recommandations disponibles. Évaluer l'impact d'une correction avant de l'appliquer, puis vérifier au scan suivant. Le score dépend de la politique et des contrôles évalués ; il ne constitue pas à lui seul une mesure complète de sécurité.
 
 **En pratique :** choisir la machine → ouvrir sa politique de contrôle → lire un résultat Failed (échoué) → lire la recommandation → faire valider et appliquer la correction → vérifier au contrôle suivant. Passed signifie réussi.
 
-## 7. IT Hygiene et agents — connaître le parc
+## 7. IT Hygiene et agents : connaître le parc
 
 IT Hygiene permet d'examiner les inventaires système et logiciel ainsi que les données de processus et de réseau disponibles. Les agents permettent de comprendre quelles machines remontent leurs informations. Un agent déconnecté ne garantit pas une collecte récente : vérifier la dernière activité et la connexion avant d'interpréter l'absence d'alertes.
 
